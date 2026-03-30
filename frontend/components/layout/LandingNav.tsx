@@ -8,44 +8,26 @@ export function LandingNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background text-sm">
-      <div className="container flex h-16 items-center justify-between px-6 lg:px-12 max-w-full">
-        <Link href="/" className="flex items-center space-x-2 mr-10 group">
-          <div className="bg-primary text-black px-2 py-1 flex items-center justify-center font-heading font-black text-xl tracking-tighter group-hover:bg-white transition-colors duration-200">
+    <nav className="sticky top-0 z-50 w-full bg-white border-b-[4px] border-black py-4">
+      <div className="container flex h-14 items-center justify-between px-6 lg:px-12 max-w-full">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="bg-black text-white px-2 py-1 flex items-center justify-center font-heading font-black text-2xl tracking-tighter uppercase">
             SEALFI
           </div>
+          <p className="hidden md:block font-mono text-[10px] font-black uppercase text-[#555]">BLOCKCHAIN_ENVELOPE.V1</p>
         </Link>
 
-        <div className="flex-1 flex gap-8 items-center h-full">
-          {[
-            { label: "PROPOSALS", href: "/proposals" },
-            { label: "VOTE", href: "/vote" },
-            { label: "GOVERNANCE", href: "/governance" },
-          ].map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "h-full flex items-center font-heading font-bold text-xs tracking-widest text-[#888888] hover:text-primary transition-colors border-b-2 border-transparent",
-                pathname.startsWith(link.href) && "text-white border-primary"
-              )}
-            >
-              {link.label}
+        <div className="flex-1 flex gap-10 items-center justify-center ml-10">
+          {["PROPOSALS", "VOTE", "GOV"].map((l) => (
+            <Link key={l} href={`/${l.toLowerCase()}`} className={cn("font-heading font-black text-sm uppercase tracking-wide transition-colors", pathname.startsWith(`/${l.toLowerCase()}`) ? "text-primary" : "text-black hover:text-primary")}>
+              {l}
             </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex flex-col items-end mr-4 text-[10px] font-mono uppercase text-[#888888]">
-            <span>SEPOLIA_SYSTEM: CONNECTED</span>
-            <span className="text-primary group flex items-center gap-1 cursor-default">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              EMITTED_FHE_CORES: 12
-            </span>
-          </div>
-          <button className="brutalist-button-primary text-xs font-black px-8 py-2">
-            CONNECT_WALLET
-          </button>
+          <button className="bg-black text-white px-6 py-2 rounded-full font-heading font-black text-xs uppercase transition-all hover:scale-105 active:scale-95">CONNECT_ACCOUNT</button>
+          <button className="bg-white text-black border-[3px] border-black px-6 py-2 rounded-full font-heading font-black text-xs uppercase transition-all hover:bg-black hover:text-white active:scale-95">SETTINGS</button>
         </div>
       </div>
     </nav>
