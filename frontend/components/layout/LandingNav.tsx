@@ -1,33 +1,61 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { Wallet, Settings, Shield } from "lucide-react";
+import { Shield as ShieldIcon } from "lucide-react";
 
 export function LandingNav() {
-  const pathname = usePathname();
+  const [account, setAccount] = useState<string | null>(null);
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        setAccount(accounts[0]);
+      } catch (err) {
+        console.error("Wallet connection failed:", err);
+      }
+    } else {
+      alert("Please install a web3 wallet like MetaMask!");
+    }
+  };
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white border-b-[4px] border-black py-4">
-      <div className="container flex h-14 items-center justify-between px-6 lg:px-12 max-w-full">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="bg-black text-white px-2 py-1 flex items-center justify-center font-heading font-black text-2xl tracking-tighter uppercase">
-            SEALFI
+    <nav className="sticky top-0 z-50 py-4 px-6 lg:px-12 bg-white border-b-[4px] border-black">
+      <div className="container max-w-full flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="bg-[#E41E26] p-2 neo-border-thick transition-transform group-hover:rotate-12">
+            <ShieldIcon className="w-5 h-5 text-white" />
           </div>
-          <p className="hidden md:block font-mono text-[10px] font-black uppercase text-[#555]">BLOCKCHAIN_ENVELOPE.V1</p>
+          <span className="font-heading font-black text-2xl tracking-tighter text-black uppercase">
+            SEAL<span className="text-[#E41E26]">FI</span>
+          </span>
         </Link>
 
-        <div className="flex-1 flex gap-10 items-center justify-center ml-10">
-          {["PROPOSALS", "VOTE", "GOV"].map((l) => (
-            <Link key={l} href={`/${l.toLowerCase()}`} className={cn("font-heading font-black text-sm uppercase tracking-wide transition-colors", pathname.startsWith(`/${l.toLowerCase()}`) ? "text-primary" : "text-black hover:text-primary")}>
-              {l}
+        <div className="hidden md:flex items-center gap-8">
+          {["PROPOSALS", "VOTE", "GOV"].map((item) => (
+            <Link 
+              key={item} 
+              href={`/${item.toLowerCase()}`}
+              className="font-mono text-[11px] font-black text-black hover:text-[#E41E26] transition-colors tracking-widest"
+            >
+              {item}
             </Link>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
-          <button className="bg-black text-white px-6 py-2 rounded-full font-heading font-black text-xs uppercase transition-all hover:scale-105 active:scale-95">CONNECT_ACCOUNT</button>
-          <button className="bg-white text-black border-[3px] border-black px-6 py-2 rounded-full font-heading font-black text-xs uppercase transition-all hover:bg-black hover:text-white active:scale-95">SETTINGS</button>
+          <button 
+            onClick={connectWallet}
+            className="flex items-center gap-2 bg-black text-white px-6 py-2.5 rounded-full font-heading font-black text-[10px] uppercase neo-shadow-hard hover:bg-[#E41E26] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+          >
+            {account ? `${account.slice(0, 6)}...${account.slice(-4)}` : "CONNECT_WALLET"}
+          </button>
+          
+          <button className="p-2.5 bg-white neo-border-thick rounded-full hover:bg-black group transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <Settings className="w-4 h-4 text-black group-hover:text-white" />
+          </button>
         </div>
       </div>
     </nav>
