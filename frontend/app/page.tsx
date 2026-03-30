@@ -26,9 +26,9 @@ export default function Home() {
               <Activity className="w-4 h-4 animate-pulse" /> NETWORK_STATUS: SECURE_ENCLAVE_LIVE
             </div>
 
-            <h1 className="font-heading font-black text-6xl md:text-[120px] leading-[0.8] tracking-tighter text-black uppercase drop-shadow-[6px_6px_0px_#E41E26]">
-              EVERY VOTE<br />
-              IS <span className="text-[#E41E26]">SEALED.</span>
+            <h1 className="group font-heading font-black text-6xl md:text-[120px] leading-[0.8] tracking-tighter text-black uppercase drop-shadow-[6px_6px_0px_#E41E26] transition-all duration-300">
+              <span className="hover:text-[#FACC15] transition-colors cursor-default block mb-4">EVERY VOTE</span>
+              <span className="hover:text-[#FACC15] transition-colors cursor-default block">IS <span className="text-[#E41E26] group-hover:text-[#FACC15]">SEALED.</span></span>
             </h1>
             
             <p className="font-heading font-bold text-xl md:text-2xl max-w-4xl mx-auto text-black/80 leading-tight uppercase tracking-tight italic">
