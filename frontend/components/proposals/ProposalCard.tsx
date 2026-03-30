@@ -4,6 +4,20 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Users, ArrowUpRight } from "lucide-react";
 import { SealedValue } from "./SealedValue";
+import { cn } from "@/lib/utils";
+
+export interface Proposal {
+  id: string;
+  title: string;
+  proposer: string;
+  voteStart: number;
+  voteEnd: number;
+  state: "ACTIVE" | "PASSED" | "FAILED" | "PENDING" | "EXECUTED" | "SUCCEEDED" | "DEFEATED";
+  forVotes?: number;
+  againstVotes?: number;
+  abstainVotes?: number;
+  voterCount: number;
+}
 
 interface ProposalCardProps {
   id?: string;
@@ -14,16 +28,17 @@ interface ProposalCardProps {
   timeLeft: string;
   category: string;
   color?: string;
+  className?: string;
 }
 
-export function ProposalCard({ id = "0000", title, status, description, votes, timeLeft, category, color = "#E41E26" }: ProposalCardProps) {
+export function ProposalCard({ id = "0000", title, status, description, votes, timeLeft, category, color = "#E41E26", className }: ProposalCardProps) {
   const safeId = id ? id.toString().padStart(4, '0') : "0000";
   const isActive = status === "ACTIVE";
 
   return (
     <motion.div 
-      whileHover={{ y: -5 }}
-      className="bg-white neo-border-thick rounded-[24px] overflow-hidden neo-shadow-hard transition-all h-full flex flex-col"
+      whileHover={{ y: -8, x: 2 }}
+      className={cn("bg-white neo-border-thick rounded-[24px] overflow-hidden neo-shadow-hard transition-all h-full flex flex-col hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]", className)}
     >
       <div 
         className="p-4 border-b-[3px] border-black flex justify-between items-center"
@@ -64,7 +79,7 @@ export function ProposalCard({ id = "0000", title, status, description, votes, t
         </div>
       </div>
 
-      <button className="w-full py-4 font-heading font-black text-[11px] uppercase tracking-tighter bg-black text-white hover:bg-[#E41E26] transition-colors border-t-[3px] border-black">
+      <button className="w-full py-4 font-heading font-black text-[11px] uppercase tracking-tighter bg-black text-white hover:bg-[#E41E26] transition-all border-t-[3px] border-black">
         OPEN_SECURE_ENCLAVE
       </button>
     </motion.div>

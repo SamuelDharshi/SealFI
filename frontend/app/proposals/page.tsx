@@ -64,8 +64,8 @@ export default function ProposalsPage() {
               PROPOSALS
             </h1>
           </div>
-          <button className="brutalist-button-outline text-xs">
-            <Plus className="mr-2 w-4 h-4" />
+          <button className="flex items-center gap-2 bg-[#E41E26] text-white px-6 py-3 font-heading font-black text-xs uppercase tracking-widest neo-border-thick neo-shadow-hard hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">
+            <Plus className="w-4 h-4" />
             CREATE_NEW_PROPOSAL
           </button>
         </div>
@@ -87,9 +87,24 @@ export default function ProposalsPage() {
 
         <div className="flex flex-col gap-8">
           {filteredProposals.length > 0 ? (
-            filteredProposals.map((prop) => (
-              <ProposalCard key={prop.id} proposal={prop} className="max-w-full" />
-            ))
+            filteredProposals.map((prop, idx) => {
+              const colors = ["#E41E26", "#8B5CF6", "#10B981", "#EC4899", "#F59E0B"];
+              const color = colors[idx % colors.length];
+              return (
+                <ProposalCard 
+                  key={prop.id} 
+                  id={prop.id}
+                  title={prop.title}
+                  status={prop.state === "EXECUTED" ? "PASSED" : "ACTIVE"}
+                  description="Proposal to adjust the protocol parameters for optimal efficiency and decentralization."
+                  votes={prop.voterCount ? `${(prop.voterCount / 100).toFixed(1)}M` : "0.0M"}
+                  timeLeft={prop.state === "ACTIVE" ? "2D 14H" : "CLOSED"}
+                  category="PROTOCOL"
+                  color={color}
+                  className="max-w-full"
+                />
+              );
+            })
           ) : (
             <div className="p-20 border border-border flex flex-col items-center justify-center text-center gap-4">
               <span className="font-mono text-[#555] uppercase animate-pulse">ZERO_RECORDS_FOUND</span>
