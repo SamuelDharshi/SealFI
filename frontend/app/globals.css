@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 54 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 53%;
+    --accent: 54 100% 50%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 54 100% 50%;
+    --radius: 0px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase tracking-tighter;
+  }
+}
+
+@layer utilities {
+  .sealed-tag {
+    @apply font-mono text-primary text-xs uppercase;
+  }
+  
+  .brutalist-border {
+    @apply border border-border;
+  }
+  
+  .brutalist-card {
+    @apply bg-card brutalist-border p-6 transition-colors;
+  }
+  
+  .brutalist-button {
+    @apply inline-flex items-center justify-center px-6 py-3 font-heading font-bold uppercase transition-all active:translate-x-1 active:translate-y-1;
+  }
+  
+  .brutalist-button-primary {
+    @apply brutalist-button bg-primary text-black hover:bg-white;
+  }
+  
+  .brutalist-button-outline {
+    @apply brutalist-button border-2 border-foreground text-foreground hover:bg-foreground hover:text-background;
+  }
+}
