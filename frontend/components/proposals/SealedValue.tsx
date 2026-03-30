@@ -9,14 +9,14 @@ interface SealedValueProps {
 export function SealedValue({ value, isSealed = true, className }: SealedValueProps) {
   if (isSealed || value === undefined) {
     return (
-      <span className={cn("font-mono text-[#FFE500] uppercase animate-pulse", className)}>
+      <span className={cn("font-mono text-[#E41E26] uppercase animate-pulse drop-shadow-[1px_1px_0px_rgba(0,0,0,0.1)]", className)}>
         [sealed]
       </span>
     );
   }
 
   return (
-    <span className={cn("font-mono text-[#F5F5F5]", className)}>
+    <span className={cn("font-mono text-black font-bold", className)}>
       {value}
     </span>
   );
