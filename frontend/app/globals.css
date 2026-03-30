@@ -6,38 +6,23 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 54 100% 50%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 0%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --primary: 0 84% 50%; /* #E41E26 Red */
     --border: 0 0% 0%;
-    --input: 0 0% 94%;
-    --ring: 0 0% 0%;
-    --radius: 12px;
   }
 }
 
-@layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground font-sans; }
-  h1, h2, h3, h4 { @apply font-heading uppercase font-black tracking-tight; }
+body {
+  @apply bg-white text-black font-sans antialiased;
 }
 
 @layer utilities {
-  .neo-border { @apply border-[3px] border-black; }
-  .neo-shadow { @apply shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]; }
-  .neo-card { @apply bg-white neo-border neo-shadow p-6 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none; }
-  .neo-button { @apply inline-flex items-center justify-center px-8 py-3 font-heading font-black uppercase text-sm neo-border rounded-full transition-all active:scale-95; }
-  .neo-button-primary { @apply neo-button bg-black text-white hover:bg-white hover:text-black; }
-  .neo-button-outline { @apply neo-button bg-white text-black hover:bg-black hover:text-white; }
+  .neo-border-thick {
+    border: 3px solid black !important;
+  }
+  .neo-shadow-hard {
+    box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1) !important;
+  }
+  .neo-shadow-red {
+    box-shadow: 8px 8px 0px 0px #E41E26 !important;
+  }
 }
